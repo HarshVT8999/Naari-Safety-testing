@@ -43,6 +43,9 @@ export default function LoginPage() {
             <Button disabled={loading} className="w-100" type="submit" style={{margin:"20px 0 0 0"}}>
               Log In
             </Button>
+            <div className="w-100 text-center mt-2">
+            <Link to ="/forget-password">Forgot Password?</Link>
+          </div>
           </Form>
         </Card.Body>
       </Card>
