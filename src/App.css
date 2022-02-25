@@ -18,6 +18,17 @@ body{
   align-items: center;
   justify-content: center;
 }
+.need-acc{
+  color: white;
+  text-align: center;
+  margin-top: 2%;
+  
+}
+.sign-in{
+  color: white;
+  text-align: center;
+  margin-top: 2%;
+}
 .alt{
   margin-bottom: 40%;
   margin-left: 65%;

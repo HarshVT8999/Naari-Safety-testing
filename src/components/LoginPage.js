@@ -49,7 +49,7 @@ export default function LoginPage() {
           </Form>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
+      <div className="need-acc">
         Need an Account ? <Link to="/signup">Sign Up</Link>
       </div>
     </>
