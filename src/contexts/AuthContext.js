@@ -4,19 +4,21 @@ import { auth } from "../firebase"
 const AuthContext = React.createContext()
 
 export function useAuth() {
-  return useContext(AuthContext)
+  return useContext(AuthContext);
 }
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
+  const [isLogedIn,setIsLoggedIn] = useState(true);
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password)
   }
   
   function login(email,password){
-    return auth.signInWithEmailAndPassword(email,password)
+    return auth.signInWithEmailAndPassword(email,password);
+    setIsLoggedIn(true);
   }
 
   function logout(){
@@ -46,6 +48,7 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
+    isLogedIn,
     signup,
     login,
     logout,
@@ -57,6 +60,7 @@ export function AuthProvider({ children }) {
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}
+      {console.log(isLogedIn)}
     </AuthContext.Provider>
   )
 }
