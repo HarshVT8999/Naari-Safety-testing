@@ -8,7 +8,11 @@ import { useAuth } from '../contexts/AuthContext'
 import sound from './Audio/Siren.mp3'
 export default function HomePage() {
   const clog = () => {
+<<<<<<< HEAD
     console.log("Clicked")
+=======
+    console.log("Clicked");
+>>>>>>> 7570717454ff64cf1f49e8c1763a95286e80c7f0
     console.log(useAuth)
   }
   const [error, setError] = useState()

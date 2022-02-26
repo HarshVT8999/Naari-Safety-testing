@@ -4,19 +4,27 @@ import { auth } from "../firebase"
 const AuthContext = React.createContext()
 
 export function useAuth() {
-  return useContext(AuthContext)
+  return useContext(AuthContext);
 }
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
+  const [isLogedIn,setIsLoggedIn] = useState(true);
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password)
   }
+<<<<<<< HEAD
 
   function login(email, password) {
     return auth.signInWithEmailAndPassword(email, password)
+=======
+  
+  function login(email,password){
+    return auth.signInWithEmailAndPassword(email,password);
+    setIsLoggedIn(true);
+>>>>>>> 7570717454ff64cf1f49e8c1763a95286e80c7f0
   }
 
   function logout() {
@@ -46,6 +54,7 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
+    isLogedIn,
     signup,
     login,
     logout,
@@ -57,7 +66,11 @@ export function AuthProvider({ children }) {
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}
+<<<<<<< HEAD
       {console.log(currentUser)}
+=======
+      {console.log(isLogedIn)}
+>>>>>>> 7570717454ff64cf1f49e8c1763a95286e80c7f0
     </AuthContext.Provider>
   )
 }
