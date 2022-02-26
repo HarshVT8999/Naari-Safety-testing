@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 
 export default function Signup() {
@@ -10,29 +10,29 @@ export default function Signup() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
-  const {signup} = useAuth()
+  const { signup } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
+  const history = useHistory()
 
-  async function handleSubmit(e){
-      e.preventDefault()
+  async function handleSubmit(e) {
+    e.preventDefault()
 
-      if(passwordRef.current.value !==
-        passwordConfirmRef.current.value){
-        return setError('Passwords do not match')
-      }
-
-      try{
-        setError('')
-        setLoading(true)
-        await signup(emailRef.current.value,passwordRef.current.value,nameRef.current.value)
-        navigate("/home")
-      } catch {
-        setError('Failed to Create an account')
-      }
-      setLoading(false)
+    if (passwordRef.current.value !==
+      passwordConfirmRef.current.value) {
+      return setError('Passwords do not match')
     }
+
+    try {
+      setError('')
+      setLoading(true)
+      await signup(emailRef.current.value, passwordRef.current.value, nameRef.current.value)
+      history.push("/home")
+    } catch {
+      setError('Failed to Create an account')
+    }
+    setLoading(false)
+  }
 
   return (
     <>
@@ -41,7 +41,7 @@ export default function Signup() {
           <h2 className="text-center mb-4">Sign Up</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
-          <Form.Group id="name">
+            <Form.Group id="name">
               <Form.Label>Name</Form.Label>
               <Form.Control type="name" ref={nameRef} required />
             </Form.Group>
@@ -65,7 +65,7 @@ export default function Signup() {
               <Form.Label>Password Confirmation</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required />
             </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit" style={{margin:"20px 0 0 0"}}>
+            <Button disabled={loading} className="w-100" type="submit" style={{ margin: "20px 0 0 0" }}>
               Sign Up
             </Button>
           </Form>

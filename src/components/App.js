@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import { AuthProvider } from "../contexts/AuthContext";
 import Signup from "./SignUp";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Dashboard from "./Dashboard"
 import HomePage from "./HomePage"
 import LoginPage from "./LoginPage"
@@ -25,19 +25,19 @@ function App() {
                 <div className="w-100" style={{ maxWidth: "400px" }}>
                     <Router>
                         <AuthProvider>
-                            <Routes>
-                                <Route exact path="/" element={<Dashboard />} />
-                                <Route path="/signup" element={<Signup />} />
-                                <Route path="/login" element={<LoginPage />} />
-                                <Route element={<PrivateRoute />}>
-                                    <Route path="/home" element={<HomePage />} />
-                                    <Route exact path="/account" element={<Account />} />
-                                    <Route exact path="/settings" element={<Settings />} />
-                                    <Route exact path="/contact" element={<Contact />} />
-                                </Route>
-                                <Route path="/forget-password" element={<Forgetpass />} />
-                                <Route path="/update-profile" element={<UpdateProfile />} />
-                            </Routes>
+                            <Switch>
+                                <Route exact path="/" component={Dashboard} />
+                                <Route path="/signup" component={Signup} />
+                                <Route path="/login" component={LoginPage} />
+
+                                <PrivateRoute path="/home" component={HomePage} />
+                                <Route exact path="/account" component={Account} />
+                                <Route exact path="/settings" component={Settings} />
+                                <Route exact path="/contact" component={Contact} />
+
+                                <Route path="/forget-password" component={Forgetpass} />
+                                <Route path="/update-profile" component={UpdateProfile} />
+                            </Switch>
                         </AuthProvider>
                     </Router>
                 </div>

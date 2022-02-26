@@ -1,29 +1,29 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 
 export default function LoginPage() {
   const emailRef = useRef()
   const passwordRef = useRef()
-  const {login} = useAuth()
+  const { login } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
+  const history = useHistory()
 
-  async function handleSubmit(e){
-      e.preventDefault()
+  async function handleSubmit(e) {
+    e.preventDefault()
 
-      try{
-        setError('')
-        setLoading(true)
-        await login(emailRef.current.value,passwordRef.current.value)
-        navigate("/home")
-      } catch {
-        setError('Failed to Log In')
-      }
-      setLoading(false)
+    try {
+      setError('')
+      setLoading(true)
+      await login(emailRef.current.value, passwordRef.current.value)
+      history.push("/home")
+    } catch {
+      setError('Failed to Log In')
     }
+    setLoading(false)
+  }
 
   return (
     <>
@@ -40,12 +40,12 @@ export default function LoginPage() {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit" style={{margin:"20px 0 0 0"}}>
+            <Button disabled={loading} className="w-100" type="submit" style={{ margin: "20px 0 0 0" }}>
               Log In
             </Button>
             <div className="w-100 text-center mt-2">
-            <Link to ="/forget-password">Forgot Password?</Link>
-          </div>
+              <Link to="/forget-password">Forgot Password?</Link>
+            </div>
           </Form>
         </Card.Body>
       </Card>

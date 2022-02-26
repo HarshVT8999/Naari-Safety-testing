@@ -3,16 +3,17 @@ import '../App.css'
 import Navbar from './Navbar'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState } from 'react'
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { useAuth } from '../contexts/AuthContext'
 import sound from './Audio/Siren.mp3'
 export default function HomePage() {
   const clog = () => {
     console.log("Clicked")
+    console.log(useAuth)
   }
   const [error, setError] = useState()
   const { currentUser, logout } = useAuth()
-  const navigate = useNavigate()
+  const history = useHistory()
 
   function siren() {
     const alert = new Audio(sound);
@@ -23,7 +24,7 @@ export default function HomePage() {
     setError('')
     try {
       await logout()
-      navigate("/login")
+      history.push("/login")
     } catch {
       setError('Failed to Logout')
     }
